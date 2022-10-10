@@ -1,0 +1,2 @@
+## This extracts the .gz files for use, cuts out just the originating IP, destination IP, and the hostname, and then sorts and counts the pairs
+gunzip -c * | zeek-cut id.orig_h id.resp_h agent_hostname | sort | uniq -c | sort -rn
