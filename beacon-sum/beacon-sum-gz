@@ -1,0 +1,2 @@
+## Extracts the conn.*.gz files, cuts out just the time stamp, the originating IP and destination IP, looks for an IP pair specified, sorts and counts by the hour, and then show the minimum number of connections per hour, maximum number of connections per hour, and the standard deviation.
+gunzip -c conn.* | zeek-cut -d ts id.orig_h id.resp_h | grep $1 | grep $2 | cut -b 12-13 | sort | uniq -c | tr -s " " | cut -d ' ' -f 2 | datamash count 1 min 1 max 1 sstdev 1
