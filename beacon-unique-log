@@ -1,0 +1,2 @@
+## This cats out the *.log files for use, cuts out just the originating IP, destination IP, and the hostname, and then sorts and counts the pairs
+cat conn.* | zeek-cut -d ts id.orig_h id.resp_h | grep $1 | grep $2 | cut -b 12-13 | sort | uniq -c | tr -s " " | awk '{ print $2 " " $1}'
