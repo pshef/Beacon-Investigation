@@ -1,0 +1,2 @@
+## This searches for all .gz files stored in /opt/zeek/logs (the default location for zeek) and extracts them for use, cuts out just the time stamp, the originating IP and destination IP, looks for an IP pair specified, sorts and counts, and prints the number of connections per date
+find /opt/zeek/logs/* -type f -name "*.gz" -exec gunzip -c {} + | zeek-cut -D %Y-%m-%d ts id.orig_h id.resp_h | grep $1 | grep $2 | sort | uniq -c | tr -s " " | awk '{ print $2 " " $1 }'
