@@ -1,0 +1,2 @@
+## This searches for all .gz files stored in /opt/zeek/logs (the default location for zeek) and extracts them for use, cuts out just the originating IP, destination IP, and the hostname, and then sorts and counts the pairs
+find /opt/zeek/logs/* -type f -name "*.gz" -exec gunzip -c {} + | zeek-cut -D %Y-%m-%d ts id.orig_h id.resp_h agent_hostname | sort | uniq -c | sort -rn | grep -v "127.0.0.1"
